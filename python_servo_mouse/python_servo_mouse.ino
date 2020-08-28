@@ -1,16 +1,19 @@
 #define s_pin 13
+#define s1_pin 12
 #include <Servo.h>
 String serialData;
-int servoX;
-int servoY;
-Servo servo;
+
+Servo servoX;
+Servo servoY;
 
 void setup() {
   // put your setup code here, to run once:
-  servo.attach(s_pin);
+  servoX.attach(s_pin);
   Serial.begin(9600);
-  servo.write(0);
+  servoX.write(0);
   Serial.setTimeout(10);
+  servoY.attach(s1_pin);
+  servoY.write(0);
 }
 
 void loop() {
@@ -24,7 +27,8 @@ void loop() {
 
   Serial.println(serialData);
 
-  servo.write(parseServoX(serialData));
+  servoX.write(parseServoX(serialData));
+  servoY.write(parseServoY(serialData));
   
 }
 
